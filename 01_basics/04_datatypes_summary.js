@@ -52,3 +52,34 @@ const myFn = function(){
 //        Arrays  =>  object
 //        Function  =>  function
 //        Object  =>  object
+
+
+
+
+// ********* STACK AND HEAP MEMORY ALLOCATIONS **********
+
+
+// Primitive -> Stack
+// Non-primitive -> Heap 
+
+// stack -> copy pass
+let ytName = "Kryptonite" //yeh jayega stack mein
+let anotherName = ytName
+anotherName = "Sehaj"
+
+console.log(ytName);
+console.log(anotherName);
+
+// heap -> reference pass
+let user1 = {
+    email: "hey@gmail.com",
+    upi: "4654651@paytm"
+}
+let user2 = user1
+
+user2.email = "wassup@google.com"
+
+console.log(user1.email);
+console.log(user2.email);
+// dono ka same result ayega kyuki HEAP mein reference pass hota hai.
+// this means jo bhi aap changes karte hai vo aa original cheezo mein karte hai !!
