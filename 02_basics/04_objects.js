@@ -65,3 +65,33 @@ console.log(Object.entries(tinderUser)); // returns all keys:value as an ARRAY {
 // CHECK if if it has a property or not
 console.log(tinderUser.hasOwnProperty('isLogged'));
 
+
+// ******** NEW *********
+
+// destructuring an object
+const course = {
+    courseName: "js in hin",
+    price: 99,
+    courseInstructor: "hitesh chaudhary"
+}
+
+const {courseInstructor: instructor} = course
+console.log(instructor);
+
+// API
+// JSON (it is a format of an API)
+// it is like an object but not an object (keys and values both must be string in JSON)
+// API mein objects,array and both mil sakte hai toh you need to handle acc to their nature
+
+// {
+//     "name": "sehaj",
+//     "course": "js in hin",
+//     "price": "free"
+// }
+
+// [
+//     {},
+//     {},
+//     {}
+// ]
+
