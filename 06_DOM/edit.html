@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Element</title>
+</head>
+<body style="background-color: #212121; color: white">
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+</body>
+<script>
+    // add an element in the list
+    // isme pura tree traverse karna padega 
+    // when we add li.innerhtml
+    function addLang(langname){
+        const li = document.createElement('li')
+        li.innerHTML = langname
+        document.querySelector('.language').appendChild(li)
+    }
+    addLang("python")
+    addLang("cpp")
+    
+    // optimized
+    function optimisedAdd(langname){
+        const li = document.createElement('li')
+        li.append(document.createTextNode(langname))
+        document.querySelector('.language').appendChild(li)
+    }
+    optimisedAdd("golang")
+
+
+    // edit values
+    const secondLang = document.querySelector('li:nth-child(2)') // jo edit karna hai vo selecct kiya 
+    // secondLang.innerHTML = "java" // not optimized. [direct]
+    const newli = document.createElement('li') // create that desired element with which you want to replace.
+    newli.textContent = "Mojo" // value put in the element created
+    secondLang.replaceWith(newli) // replaced the selected with newli
+
+
+    // remove and element
+    const lastLang = document.querySelector('li:last-child') // select
+    lastLang.remove() // remove
+
+
+
+
+
+</script>
+</html>
