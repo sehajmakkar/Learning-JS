@@ -1,0 +1,89 @@
+// read this
+// type, timestamp, defaultPrevented
+// target, toElement, srcelement(impt), currentTarget
+// clientX, clientY, screenX, screenY [clients position related]
+// altkey, ctrlkey, shift, keyCode
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Events</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+
+<script>
+    // events run sequentially except some
+    // browser events invoke on some activity..
+    // avoid using events directly on html, it causes scalability issues(like onclick="" on the tag etc) [but you can use in react]
+
+    //yeh bhi good approach nahi hai
+    // document.getElementById('owl').onclick = function(){
+    //     alert("owl clicked")
+    // }
+
+    // another approaches 
+    // attachEvent()
+    // jQuery - on
+
+    // you should use eventlistener - best
+    // you have to pass 3 attributes in addEventListener('event', function(){}, boolean)
+
+    // boolean is false by default
+    // this booelan represents event propagation
+        // event bubbling (false) and event capturing (true)
+
+    document.getElementById('images').addEventListener('click', function(e){
+        console.log("clicked inside the ul");
+    }, false)
+
+    document.getElementById('owl').addEventListener('click', function(e){
+        console.log("clicked owl");
+        // e.stopPropagation();
+    }, false)
+
+    // now the question is which of them will be printed first when we click owl.. as owl is also inside images ul, so both messages must appear but which ones first?? here comes the concept of bubbling (where the boolean inside the eventlistener is set to false!) ...
+    // a bubble goes from inside to outside(down to up)
+    // so the 'clicked owl' will be printed first and then the other...
+
+    // opposite of this is event capturing (where the boolean inside the eventlistener is set to true!), this propagates from top to bottom
+
+    // we can use e.stopPropagation() to stop event bubbling and all, and this way the event doesnt go up to the src (in this case the images ul)
+
+
+    // preventDefault
+    document.getElementById('google').addEventListener('click', function(e){
+        console.log("google clicked")
+        e.preventDefault()
+    })
+
+    // project type -> click and image gayab
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log(e.target.parentNode);
+        // removal.remove(); // to remove an element
+        
+        // but here the problem starts we have selected the parentnode which the ul so whenever we click the ul the whole ul gets remmoved but wwe only need the pictures so wee need to implement some checks...
+        
+        if(e.target.tagName === 'IMG'){
+            console.log(e.target.id);
+            let removepic = e.target.parentNode
+            removepic.remove()
+        }
+    })
+
+</script>
+
+</html>
