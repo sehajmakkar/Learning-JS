@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>chai aur code</h1>
+    <button id="stop">
+        Stop
+    </button>
+</body>
+<script>
+    // set time out
+    // - also calls API
+    // needs handler (function) and time (in ms)
+    setTimeout(function(){
+        console.log("Sehaj") // prints after 1s, only one time after a time interval..
+    }, 1000)
+
+    // you can also pass a function in this..
+    // for ex you want to change a text in h1 after 5sec loading the website..
+
+    const changeText = function(){
+        document.querySelector('h1').innerHTML = "Learning JS"
+    }
+    const changeMe = setTimeout(changeText, 2000) // changes the text in h1 after 2000ms
+
+    // but how can we stop this event?
+    // clearTimeout(changeMe) // this will stop directly.
+    
+    // this will stop the change when we click the stop button as we have added a event on it...
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearTimeout(changeMe);
+        console.log("stopped");
+    })
+
+</script>
+</html>
